@@ -301,6 +301,9 @@ DOMAIN-SUFFIX,internalfb.com
 DOMAIN-SUFFIX,intuit.com
 DOMAIN-SUFFIX,intuitibits.com
 DOMAIN-SUFFIX,ionos.com
+DOMAIN-SUFFIX,ip4.me
+DOMAIN-SUFFIX,ip6.me
+DOMAIN-SUFFIX,ip6only.me
 DOMAIN-SUFFIX,iptv.online
 DOMAIN-SUFFIX,is.fi
 DOMAIN-SUFFIX,island-of-pleasure.site
@@ -741,6 +744,7 @@ DOMAIN-SUFFIX,webnames.ca
 DOMAIN-SUFFIX,weebly.com
 DOMAIN-SUFFIX,welt.de
 DOMAIN-SUFFIX,wetransfer.com
+DOMAIN-SUFFIX,whatismyv6.com
 DOMAIN-SUFFIX,wheather.com
 DOMAIN-SUFFIX,wikiart.org
 DOMAIN-SUFFIX,wikidot.com
