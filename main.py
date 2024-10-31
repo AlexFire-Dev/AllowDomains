@@ -101,6 +101,23 @@ class DomainProcessor:
     def nftables_out(self):
         keys = set(self.raw_v4.keys()) | set(self.raw_v6.keys())
 
+        with open(f"{out_dir}openwrt/vpn-domain.lst", "w") as file:
+            domains = set()
+            domains_single = set(self.domains.get("single"))
+
+            for key in self.domains:
+                if key != "single":
+                    domains = domains | self.domains.get(key)
+
+            domains = domains.union(domains_single)
+
+            domains = domains - self.direct
+            domains = sorted(domains)
+
+            domains = [f"nftset=/{x}/6#inet#fw4#vpn_domains_v6\nnftset=/{x}/4#inet#fw4#vpn_domains" for x in domains]
+
+            print(*domains, file=file, sep='\n')
+
         with open(f"{out_dir}openwrt/vpn-subnet.lst", "w") as file:
             for key in keys:
                 v4 = self.raw_v4.get(key)
@@ -109,23 +126,6 @@ class DomainProcessor:
                 print(f"\n# {key} v4", *v4, f"\n# {key} v6", *v6,
                       file=file, sep='\n'
                       )
-
-            with open(f"{out_dir}openwrt/vpn-domain.lst", "w") as file:
-                domains = set()
-                domains_single = set(self.domains.get("single"))
-
-                for key in self.domains:
-                    if key != "single":
-                        domains = domains | self.domains.get(key)
-
-                domains = domains.union(domains_single)
-
-                domains = domains - self.direct
-                domains = sorted(domains)
-
-                domains = [f"nftset=/{x}/4#inet#fw4#vpn_domains\nnftset=/{x}/6#inet#fw4#vpn_domains_v6" for x in domains]
-
-                print(*domains, file=file, sep='\n')
 
 
     def shadowrocket_out(self):
