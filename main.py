@@ -49,10 +49,9 @@ class DomainProcessor:
     def get_raw_subnets(self):
         """ function downloads blocked subnets from different sources """
 
-        # discord list
         # From https://iplist.opencck.org/
-        self.raw_v4["discord"] = requests.get("https://iplist.opencck.org/?format=text&data=cidr4&site=discord.gg&site=discord.media").text.splitlines()
-        self.raw_v6["discord"] = requests.get("https://iplist.opencck.org/?format=text&data=cidr6&site=discord.gg&site=discord.media").text.splitlines()
+        self.raw_v4["subnets"] = requests.get("https://iplist.opencck.org/?format=text&data=cidr4&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org&site=youtube.com").text.splitlines()
+        self.raw_v6["subnets"] = requests.get("https://iplist.opencck.org/?format=text&data=cidr6&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org&site=youtube.com").text.splitlines()
 
 
     def process_domains(self):
