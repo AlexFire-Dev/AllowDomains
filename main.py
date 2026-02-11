@@ -203,14 +203,15 @@ class DomainProcessor:
             domains = domains - self.direct
             domains = sorted(domains)
 
-            domains_lines = [
-                f"nftset=/{x}/6#inet#fw4#vpn_domains_v6\nnftset=/{x}/4#inet#fw4#vpn_domains"
+            domains_lines_v4 = [
+                # f"nftset=/{x}/6#inet#fw4#vpn_domains_v6\nnftset=/{x}/4#inet#fw4#vpn_domains"
+                f"nftset=/{x}/4#inet#fw4#vpn_domains"
                 for x in domains
             ]
 
-            print(*domains_lines, file=file, sep='\n')
+            print(*domains_lines_v4, file=file, sep='\n')
 
-        log(f"FILE write done : {out_domains_path} lines={len(domains_lines)}")
+        log(f"FILE write done : {out_domains_path} lines={len(domains_lines_v4)}")
 
         out_subnets_path = f"{out_dir}openwrt/vpn-subnet.lst"
         log(f"FILE write start: {out_subnets_path}")
@@ -219,7 +220,8 @@ class DomainProcessor:
                 v4 = self.raw_v4.get(key)
                 v6 = self.raw_v6.get(key)
 
-                print(f"\n# {key} v4", *v4, f"\n# {key} v6", *v6, file=file, sep='\n')
+                # print(f"\n# {key} v4", *v4, f"\n# {key} v6", *v6, file=file, sep='\n')
+                print(*v4, file=file, sep='\n')
 
         # approximate line count for diagnostics
         log(
