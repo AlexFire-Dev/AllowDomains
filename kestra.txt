@@ -1,0 +1,94 @@
+id: allowdomains_regen_main
+namespace: alex.allowdomains
+
+triggers:
+  - id: daily
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "0 3 * * *"
+
+tasks:
+  - id: regen_and_push
+    type: io.kestra.plugin.scripts.shell.Commands
+
+    taskRunner:
+      type: io.kestra.plugin.scripts.runner.docker.Docker
+
+    containerImage: python:3.11-slim
+
+    env:
+      GITHUB_TOKEN: "{{ secret('GITHUB_TOKEN') }}"
+      REPO: "AlexFire-Dev/AllowDomains"
+      BRANCH: "main"
+      PIP_NO_CACHE_DIR: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      TLDEXTRACT_CACHE: "/tmp/tldextract"
+
+    commands:
+      - |
+        set -euo pipefail
+
+        echo "=== [1/6] Install system deps ==="
+        apt-get update
+        apt-get install -y --no-install-recommends git ca-certificates
+        rm -rf /var/lib/apt/lists/*
+
+        echo "=== [2/6] Clone repo ==="
+        rm -rf repo
+        git clone --depth 1 "https://github.com/${REPO}.git" repo
+        cd repo
+
+        echo "=== DEBUG GITHUB TOKEN ==="
+        if [ -z "${GITHUB_TOKEN:-}" ]; then
+          echo "GITHUB_TOKEN is EMPTY"
+          exit 1
+        else
+          echo -n "GITHUB_TOKEN length: "
+          printf "%s" "$GITHUB_TOKEN" | wc -c
+
+          first4="$(printf "%s" "$GITHUB_TOKEN" | cut -c1-4)"
+          last4="$(printf "%s" "$GITHUB_TOKEN" | tail -c 4)"
+          echo "GITHUB_TOKEN preview: ${first4}****${last4}"
+        fi
+
+        git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git"
+        git fetch origin "${BRANCH}"
+        git checkout -B "${BRANCH}" "origin/${BRANCH}"
+
+        echo "=== [3/6] Setup venv + deps ==="
+        python -m venv .venv
+        . .venv/bin/activate
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        else
+          pip install requests tldextract
+        fi
+
+        echo "=== [4/6] Run generator ==="
+        python main.py
+
+        echo "=== [5/6] Check changes ==="
+        if [ -z "$(git status --porcelain -- out/)" ]; then
+          echo "No changes in out/; exiting."
+          exit 0
+        fi
+
+        echo "=== [6/6] Commit & push ==="
+        git config user.email "bot@users.noreply.github.com"
+        git config user.name "allowdomains-bot"
+        git add out/
+        git commit -m "chore: regenerate configs"
+
+        for i in 1 2 3; do
+          if git push origin "${BRANCH}"; then
+            exit 0
+          fi
+          echo "Push failed, rebasing and retrying ($i/3)..."
+          git fetch origin "${BRANCH}"
+          git rebase "origin/${BRANCH}"
+          sleep 2
+        done
+
+        echo "Push failed after retries"
+        exit 1
