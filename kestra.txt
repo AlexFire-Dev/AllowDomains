@@ -111,7 +111,7 @@ errors:
 
         payload=$(cat <<'JSON'
         {
-          "content": "❌ Flow failed: **{{ flow.namespace }}.{{ flow.id }}**\nExecution: **{{ execution.id }}**\nTime: **{{ execution.startDate }}** \nOpen: https://kestra.home.af.shvarev.com/ui/executions/{{ execution.id }}"
+          "content": "❌ Flow failed: **{{ flow.namespace }}.{{ flow.id }}**\nExecution: **{{ execution.id }}**\nTime: **{{ execution.startDate }}** \nOpen: https://kestra.home.af.shvarev.com/ui/main/executions/alex.allowdomains/allowdomains_regen_main/{{ execution.id }}"
         }
         JSON
         )
