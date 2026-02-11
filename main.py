@@ -266,6 +266,47 @@ class DomainProcessor:
         log(f"FILE write done : {out_domain_path} lines={len(domains_lines)}")
         log("STEP shadowrocket_out: done")
 
+    def validate_outputs(self):
+        """
+        Simple sanity checks to avoid pushing empty / broken outputs.
+        Does not change normal behavior; only fails when outputs look wrong.
+        """
+        log("STEP validate_outputs: start")
+
+        checks = [
+            (f"{out_dir}openwrt/vpn-domain.lst", 10),
+            (f"{out_dir}openwrt/vpn-subnet.lst", 5),
+            (f"{out_dir}shadowrocket/shadowrocket-domain.list", 10),
+            (f"{out_dir}shadowrocket/shadowrocket-ip.list", 5),
+        ]
+
+        for path, min_lines in checks:
+            if not os.path.exists(path):
+                raise RuntimeError(f"VALIDATION FAILED: missing file {path}")
+
+            size = os.path.getsize(path)
+            if size == 0:
+                raise RuntimeError(f"VALIDATION FAILED: empty file {path}")
+
+            with open(path, "r", encoding="utf-8", errors="replace") as f:
+                lines = [ln for ln in (x.strip() for x in f) if ln]
+
+            log(f"validate_outputs: {path} bytes={size} nonempty_lines={len(lines)}")
+
+            if len(lines) < min_lines:
+                raise RuntimeError(
+                    f"VALIDATION FAILED: too few lines in {path} "
+                    f"({len(lines)} < {min_lines})"
+                )
+
+            # quick "HTML error page" guard (e.g. 504 from upstream)
+            head = "\n".join(lines[:20]).lower()
+            if "<html" in head or "gateway time-out" in head or "openresty" in head:
+                raise RuntimeError(f"VALIDATION FAILED: looks like HTML error content in {path}")
+
+        log("STEP validate_outputs: OK")
+
+
 
 def main():
     log("RUN start")
@@ -273,6 +314,10 @@ def main():
     proc.handle_addresses()
     proc.shadowrocket_out()
     proc.nftables_out()
+
+    # ✅ sanity check before returning success
+    proc.validate_outputs()
+
     log("RUN done")
     return 0
 
