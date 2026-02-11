@@ -99,6 +99,8 @@ DOMAIN-SUFFIX,fastlydns.net
 DOMAIN-SUFFIX,fb.com
 DOMAIN-SUFFIX,fbcdn.net
 DOMAIN-SUFFIX,fbsbx.com
+DOMAIN-SUFFIX,fedorapeople.com
+DOMAIN-SUFFIX,fedorapeople.org
 DOMAIN-SUFFIX,fex.net
 DOMAIN-SUFFIX,fitgirl-repacks.site
 DOMAIN-SUFFIX,flashscore.com
@@ -112,6 +114,7 @@ DOMAIN-SUFFIX,freecodecamp.org
 DOMAIN-SUFFIX,geekyfuroshiki.com
 DOMAIN-SUFFIX,geni.us
 DOMAIN-SUFFIX,genius.com
+DOMAIN-SUFFIX,ghostclouds.win
 DOMAIN-SUFFIX,gitlab.com
 DOMAIN-SUFFIX,gitlab.io
 DOMAIN-SUFFIX,glpals.com
@@ -124,6 +127,7 @@ DOMAIN-SUFFIX,grafana.com
 DOMAIN-SUFFIX,grammarly.com
 DOMAIN-SUFFIX,grazie.ai
 DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,group-ib.com
 DOMAIN-SUFFIX,gulagu.net
 DOMAIN-SUFFIX,habr.com
 DOMAIN-SUFFIX,happycolorapp.com
@@ -222,11 +226,13 @@ DOMAIN-SUFFIX,nyaa.si
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,oasis.app
+DOMAIN-SUFFIX,omro.host
 DOMAIN-SUFFIX,omv-extras.org
 DOMAIN-SUFFIX,on24.com
 DOMAIN-SUFFIX,onlineradiobox.com
 DOMAIN-SUFFIX,onlinesim.ru
 DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,opencck.org
 DOMAIN-SUFFIX,opentrackr.org
 DOMAIN-SUFFIX,orbit-games.com
 DOMAIN-SUFFIX,ovdinfo.org
@@ -273,6 +279,8 @@ DOMAIN-SUFFIX,republic.ru
 DOMAIN-SUFFIX,resp.app
 DOMAIN-SUFFIX,rezka.ag
 DOMAIN-SUFFIX,ridl.io
+DOMAIN-SUFFIX,roboforex.com
+DOMAIN-SUFFIX,roboforex.org
 DOMAIN-SUFFIX,ruckuswireless.com
 DOMAIN-SUFFIX,rus-media.org
 DOMAIN-SUFFIX,rus.ec
@@ -293,6 +301,7 @@ DOMAIN-SUFFIX,semnasem.org
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,serpstat.com
 DOMAIN-SUFFIX,servarr.com
+DOMAIN-SUFFIX,server-panel.net
 DOMAIN-SUFFIX,singlekey-id.com
 DOMAIN-SUFFIX,skladchik.com
 DOMAIN-SUFFIX,skyscanner.com
@@ -340,6 +349,7 @@ DOMAIN-SUFFIX,ufile.io
 DOMAIN-SUFFIX,underver.se
 DOMAIN-SUFFIX,unian.net
 DOMAIN-SUFFIX,uniongang.tv
+DOMAIN-SUFFIX,unsplash.com
 DOMAIN-SUFFIX,vectorworks.net
 DOMAIN-SUFFIX,veeam.com
 DOMAIN-SUFFIX,velocidrone.com
