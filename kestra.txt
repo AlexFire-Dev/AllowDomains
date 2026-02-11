@@ -78,7 +78,7 @@ tasks:
         git config user.email "bot@users.noreply.github.com"
         git config user.name "allowdomains-bot"
         git add out/
-        git commit -m "chore: regenerate configs"
+        git commit -m "chore: regenerate configs | {{ execution.startDate }}"
 
         for i in 1 2 3; do
           if git push origin "${BRANCH}"; then
