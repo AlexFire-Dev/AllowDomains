@@ -273,6 +273,8 @@ class DomainProcessor:
         """
         log("STEP validate_outputs: start")
 
+        raise RuntimeError(f"VALIDATION FAILED: missing file test")
+
         checks = [
             (f"{out_dir}openwrt/vpn-domain.lst", 10),
             (f"{out_dir}openwrt/vpn-subnet.lst", 5),
