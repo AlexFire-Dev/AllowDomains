@@ -92,3 +92,31 @@ tasks:
 
         echo "Push failed after retries"
         exit 1
+
+errors:
+  - id: notify_discord_failure
+    type: io.kestra.plugin.scripts.shell.Commands
+
+    taskRunner:
+      type: io.kestra.plugin.scripts.runner.docker.Docker
+
+    containerImage: curlimages/curl:latest
+
+    env:
+      DISCORD_WEBHOOK_URL: "{{ secret('DISCORD_WEBHOOK_URL') }}"
+
+    commands:
+      - |
+        set -euo pipefail
+
+        payload=$(cat <<'JSON'
+        {
+          "content": "❌ Flow failed: **{{ flow.namespace }}.{{ flow.id }}**\nExecution: **{{ execution.id }}**\nTime: **{{ execution.startDate }}**"
+        }
+        JSON
+        )
+
+        curl -sS -X POST \
+          -H "Content-Type: application/json" \
+          -d "$payload" \
+          "${DISCORD_WEBHOOK_URL}"
