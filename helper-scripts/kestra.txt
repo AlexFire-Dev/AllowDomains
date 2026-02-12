@@ -5,6 +5,7 @@ triggers:
   - id: daily
     type: io.kestra.plugin.core.trigger.Schedule
     cron: "0 3 * * *"
+    timezone: Europe/Moscow
 
 tasks:
   - id: regen_and_push
@@ -95,28 +96,12 @@ tasks:
 
 errors:
   - id: notify_discord_failure
-    type: io.kestra.plugin.scripts.shell.Commands
-
-    taskRunner:
-      type: io.kestra.plugin.scripts.runner.docker.Docker
-
-    containerImage: curlimages/curl:latest
-
-    env:
-      DISCORD_WEBHOOK_URL: "{{ secret('DISCORD_WEBHOOK_URL') }}"
-
-    commands:
-      - |
-        set -euo pipefail
-
-        payload=$(cat <<'JSON'
-        {
-          "content": "❌ Flow failed: **{{ flow.namespace }}.{{ flow.id }}**\nExecution: **{{ execution.id }}**\nTime: **{{ execution.startDate }}** \nOpen: https://kestra.home.af.shvarev.com/ui/main/executions/alex.allowdomains/allowdomains_regen_main/{{ execution.id }}"
-        }
-        JSON
-        )
-
-        curl -sS -X POST \
-          -H "Content-Type: application/json" \
-          -d "$payload" \
-          "${DISCORD_WEBHOOK_URL}"
+    type: io.kestra.plugin.notifications.discord.DiscordIncomingWebhook
+    url: "{{ secret('DISCORD_WEBHOOK_URL') }}"
+    payload:
+      username: "Kestra"
+      content: >
+        ❌ Flow failed: **{{ flow.namespace }}.{{ flow.id }}**
+        Execution: **{{ execution.id }}**
+        Time: **{{ execution.startDate }}**
+        Open: https://kestra.home.af.shvarev.com/ui/main/executions/{{ flow.namespace }}/{{ flow.id }}/{{ execution.id }}
