@@ -9,7 +9,6 @@ TMP="/tmp/vpn-subnet.lst"
 start() {
     local count=0
 
-    # ждём доступность интернета (GitHub как индикатор)
     while true; do
         if curl -m 3 -fsS https://github.com >/dev/null 2>&1; then
             break
@@ -19,13 +18,11 @@ start() {
         sleep 2
     done
 
-    # скачиваем список
     if ! curl -f -m 15 -sS "$URL" -o "$TMP"; then
         echo "Failed to download: $URL"
         return 1
     fi
 
-    # применяем только если файл не пустой
     if [ ! -s "$TMP" ]; then
         echo "Downloaded list is empty. Not applying."
         return 1
@@ -33,7 +30,6 @@ start() {
 
     cp "$TMP" "$OUT" || return 1
 
-    # перегружаем firewall, чтобы перечитал loadfile
     /etc/init.d/firewall reload >/dev/null 2>&1 || fw4 reload >/dev/null 2>&1
 
     echo "vpn_subnets updated: $(wc -l < "$OUT") entries"
