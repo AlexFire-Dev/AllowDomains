@@ -193,11 +193,11 @@ class DomainProcessor:
         log(f"FILE write start: {out_domains_path}")
         with open(out_domains_path, "w") as file:
             domains = set()
-            domains_single = set(self.domains.get("single"))
+            domains_single = set(self.domains.get("single", []))
 
             for key in self.domains:
                 if key != "single":
-                    domains = domains | self.domains.get(key)
+                    domains = domains | self.domains.get(key, [])
 
             domains = domains.union(domains_single)
             domains = domains - self.direct
@@ -217,8 +217,8 @@ class DomainProcessor:
         log(f"FILE write start: {out_subnets_path}")
         with open(out_subnets_path, "w") as file:
             for key in keys:
-                v4 = self.raw_v4.get(key)
-                v6 = self.raw_v6.get(key)
+                v4 = self.raw_v4.get(key, [])
+                v6 = self.raw_v6.get(key, [])
 
                 # print(f"\n# {key} v4", *v4, f"\n# {key} v6", *v6, file=file, sep='\n')
                 print(*v4, file=file, sep='\n')
@@ -238,8 +238,8 @@ class DomainProcessor:
         log(f"FILE write start: {out_ip_path}")
         with open(out_ip_path, "w") as file:
             for key in keys:
-                v4 = [f"IP-CIDR,{x}" for x in self.raw_v4.get(key)]
-                v6 = [f"IP-CIDR,{x}" for x in self.raw_v6.get(key)]
+                v4 = [f"IP-CIDR,{x}" for x in self.raw_v4.get(key, [])]
+                v6 = [f"IP-CIDR,{x}" for x in self.raw_v6.get(key, [])]
 
                 print(f"\n# {key} v4", *v4, f"\n# {key} v6", *v6, file=file, sep='\n')
 
@@ -252,11 +252,11 @@ class DomainProcessor:
         log(f"FILE write start: {out_domain_path}")
         with open(out_domain_path, "w") as file:
             domains = set()
-            domains_single = set(self.domains.get("single"))
+            domains_single = set(self.domains.get("single", []))
 
             for key in self.domains:
                 if key != "single":
-                    domains = domains | self.domains.get(key)
+                    domains = domains | self.domains.get(key, [])
 
             domains = domains.union(domains_single)
             domains = domains - self.direct
