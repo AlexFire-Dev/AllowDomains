@@ -101,12 +101,12 @@ class DomainProcessor:
         url_v4 = (
             "https://iplist.opencck.org/?format=text&data=cidr4"
             "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
-            "&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org"
+            "&site=whatsapp.com&site=rutracker.org"
         )
         url_v6 = (
             "https://iplist.opencck.org/?format=text&data=cidr6"
             "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
-            "&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org"
+            "&site=whatsapp.com&site=rutracker.org"
         )
 
         # From https://iplist.opencck.org/
