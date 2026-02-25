@@ -67,16 +67,16 @@ class DomainProcessor:
         # ITDog list
         self.raw["ITDog"] = self._download_text(
             "ITDog",
-            "https://github.com/itdoginfo/allow-domains/raw/refs/heads/main/src/Russia-domains-inside.lst",
+            "https://raw.githubusercontent.com/itdoginfo/allow-domains/refs/heads/main/Russia/inside-raw.lst",
             split_mode="split_n",
         )
 
         # single list
-        self.raw["single"] = self._download_text(
-            "single",
-            "https://github.com/itdoginfo/allow-domains/raw/refs/heads/main/src/Russia-domains-inside-single.lst",
-            split_mode="split_n",
-        )
+        #self.raw["single"] = self._download_text(
+        #    "single",
+        #    "https://github.com/itdoginfo/allow-domains/raw/refs/heads/main/src/Russia-domains-inside-single.lst",
+        #    split_mode="split_n",
+        #)
 
         # af list
         af_path = f"{src_dir}domains.lst"
@@ -101,12 +101,12 @@ class DomainProcessor:
         url_v4 = (
             "https://iplist.opencck.org/?format=text&data=cidr4"
             "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
-            "&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org&site=youtube.com"
+            "&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org"
         )
         url_v6 = (
             "https://iplist.opencck.org/?format=text&data=cidr6"
             "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
-            "&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org&site=youtube.com"
+            "&site=whatsapp.com&site=instagram.com&site=facebook.com&site=rutracker.org"
         )
 
         # From https://iplist.opencck.org/
