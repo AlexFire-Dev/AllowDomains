@@ -519,6 +519,7 @@ nftset=/iptv.online/4#inet#fw4#vpn_domains
 nftset=/is.fi/4#inet#fw4#vpn_domains
 nftset=/island-of-pleasure.site/4#inet#fw4#vpn_domains
 nftset=/istories.media/4#inet#fw4#vpn_domains
+nftset=/it-tools.tech/4#inet#fw4#vpn_domains
 nftset=/itch.io/4#inet#fw4#vpn_domains
 nftset=/itninja.com/4#inet#fw4#vpn_domains
 nftset=/itsmycity.ru/4#inet#fw4#vpn_domains
