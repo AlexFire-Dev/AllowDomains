@@ -188,6 +188,7 @@ nftset=/claude.com/4#inet#fw4#vpn_domains
 nftset=/clevelandclinic.org/4#inet#fw4#vpn_domains
 nftset=/clickup.com/4#inet#fw4#vpn_domains
 nftset=/cline.bot/4#inet#fw4#vpn_domains
+nftset=/cloudflare-ech.com/4#inet#fw4#vpn_domains
 nftset=/cloudflare.net/4#inet#fw4#vpn_domains
 nftset=/cloudtorrents.com/4#inet#fw4#vpn_domains
 nftset=/cms-twdigitalassets.com/4#inet#fw4#vpn_domains
