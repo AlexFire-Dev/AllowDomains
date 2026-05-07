@@ -531,6 +531,7 @@ nftset=/jetbrains.ai/4#inet#fw4#vpn_domains
 nftset=/jetbrains.com/4#inet#fw4#vpn_domains
 nftset=/jetbrains.space/4#inet#fw4#vpn_domains
 nftset=/joesandbox.com/4#inet#fw4#vpn_domains
+nftset=/jsdelivr.net/4#inet#fw4#vpn_domains
 nftset=/jut-su.net/4#inet#fw4#vpn_domains
 nftset=/jut.su/4#inet#fw4#vpn_domains
 nftset=/jw-russia.org/4#inet#fw4#vpn_domains
