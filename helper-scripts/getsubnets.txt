@@ -2,7 +2,7 @@
 
 START=98
 
-URL="https://raw.githubusercontent.com/AlexFire-Dev/AllowDomains/main/out/openwrt/vpn-subnet.lst"
+URL="https://freedom.af.shvarev.com/openwrt/vpn-subnet.lst"
 OUT="/etc/ipset/vpn-subnet.lst"
 TMP="/tmp/vpn-subnet.lst"
 
