@@ -3,7 +3,7 @@
 START=99
 
 start () {
-    DOMAINS=https://raw.githubusercontent.com/AlexFire-Dev/AllowDomains/main/out/openwrt/vpn-domain.lst
+    DOMAINS=https://freedom.af.shvarev.com/openwrt/vpn-domain.lst
     count=0
     while true; do
         if curl -m 3 github.com; then
