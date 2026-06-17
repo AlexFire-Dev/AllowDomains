@@ -1,0 +1,4 @@
+get links: https://download.freedom.shvarev.com/
+
+domains: https://download.freedom.shvarev.com/openwrt/podkop-domain.lst
+subnets: https://download.freedom.shvarev.com/openwrt/vpn-subnet.lst

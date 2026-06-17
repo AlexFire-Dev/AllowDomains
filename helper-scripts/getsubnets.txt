@@ -2,7 +2,7 @@
 
 START=98
 
-URL="https://freedom.af.shvarev.com/openwrt/vpn-subnet.lst"
+URL="https://download.freedom.shvarev.com/openwrt/vpn-subnet.lst"
 OUT="/etc/ipset/vpn-subnet.lst"
 TMP="/tmp/vpn-subnet.lst"
 
