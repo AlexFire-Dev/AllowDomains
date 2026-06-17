@@ -95,29 +95,73 @@ class DomainProcessor:
         log(f"STEP get_raw_domains: done sources={list(self.raw.keys())}")
 
     def get_raw_subnets(self):
-        """ function downloads blocked subnets from different sources """
-        log("STEP get_raw_subnets: start")
+        def get_raw_subnets(self):
+            """ function downloads blocked subnets from different sources """
+            log("STEP get_raw_subnets: start")
 
-        url_v4 = (
-            "https://iplist.opencck.org/?format=text&data=cidr4"
-            "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
-            "&site=whatsapp.com&site=rutracker.org"
-        )
-        url_v6 = (
-            "https://iplist.opencck.org/?format=text&data=cidr6"
-            "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
-            "&site=whatsapp.com&site=rutracker.org"
-        )
+            url_v4 = (
+                "https://iplist.opencck.org/?format=text&data=cidr4"
+                "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
+                "&site=whatsapp.com&site=rutracker.org"
+            )
+            url_v6 = (
+                "https://iplist.opencck.org/?format=text&data=cidr6"
+                "&site=discord.com&site=discord.gg&site=discord.media&site=telegram.org"
+                "&site=whatsapp.com&site=rutracker.org"
+            )
 
-        # From https://iplist.opencck.org/
-        self.raw_v4["subnets"] = self._download_text("subnets_v4", url_v4, split_mode="lines")
-        self.raw_v6["subnets"] = self._download_text("subnets_v6", url_v6, split_mode="lines")
+            # From https://iplist.opencck.org/
+            self.raw_v4["subnets"] = self._download_text("subnets_v4", url_v4, split_mode="lines")
+            self.raw_v6["subnets"] = self._download_text("subnets_v6", url_v6, split_mode="lines")
 
-        log(
-            "STEP get_raw_subnets: done "
-            f"v4_lines={len(self.raw_v4.get('subnets', []))} "
-            f"v6_lines={len(self.raw_v6.get('subnets', []))}"
-        )
+            # local custom subnets list
+            custom_path = f"{src_dir}subnets.lst"
+            custom_v4 = []
+            custom_v6 = []
+
+            if os.path.exists(custom_path):
+                log(f"FILE read start: {custom_path}")
+
+                with open(custom_path, encoding="utf-8") as file:
+                    for line in file:
+                        line = line.strip()
+
+                        if not line or line.startswith("#"):
+                            continue
+
+                        line = line.split("#", 1)[0].strip()
+                        if not line:
+                            continue
+
+                        try:
+                            subnet = ipaddress.ip_network(line)
+
+                            if subnet.version == 4:
+                                custom_v4.append(line)
+                            elif subnet.version == 6:
+                                custom_v6.append(line)
+
+                        except ValueError:
+                            print(f"Invalid custom subnet: {line}", flush=True)
+
+                if custom_v4:
+                    self.raw_v4["custom"] = custom_v4
+
+                if custom_v6:
+                    self.raw_v6["custom"] = custom_v6
+
+                log(
+                    f"FILE read done : {custom_path} "
+                    f"v4={len(custom_v4)} v6={len(custom_v6)}"
+                )
+            else:
+                log(f"FILE read skip : {custom_path} does not exist")
+
+            log(
+                "STEP get_raw_subnets: done "
+                f"v4_lines={len(self.raw_v4.get('subnets', []))} "
+                f"v6_lines={len(self.raw_v6.get('subnets', []))}"
+            )
 
     def process_domains(self):
         """ processes domains to uniform standard """
