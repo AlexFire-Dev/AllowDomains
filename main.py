@@ -223,6 +223,12 @@ class DomainProcessor:
                 # print(f"\n# {key} v4", *v4, f"\n# {key} v6", *v6, file=file, sep='\n')
                 print(*v4, file=file, sep='\n')
 
+        out_raw_domains_path = f"{out_dir}openwrt/vpn-domain.lst"
+        log(f"FILE write start: {out_raw_domains_path}")
+        with open(out_raw_domains_path, "w") as file:
+            domains_lines_raw = list(map(str, domains))
+            print(*domains_lines_raw, file=file, sep='\n')
+
         # approximate line count for diagnostics
         log(
             f"FILE write done : {out_subnets_path} "
