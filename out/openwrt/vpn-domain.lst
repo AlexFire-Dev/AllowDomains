@@ -1120,6 +1120,7 @@ nftset=/teamviewer.com/4#inet#fw4#vpn_domains
 nftset=/techbargains.com/4#inet#fw4#vpn_domains
 nftset=/telegraf.by/4#inet#fw4#vpn_domains
 nftset=/telegraf.news/4#inet#fw4#vpn_domains
+nftset=/telegram.org/4#inet#fw4#vpn_domains
 nftset=/telegraph.co.uk/4#inet#fw4#vpn_domains
 nftset=/telemetr.io/4#inet#fw4#vpn_domains
 nftset=/tellapart.com/4#inet#fw4#vpn_domains
