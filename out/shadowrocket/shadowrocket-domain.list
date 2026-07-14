@@ -411,7 +411,10 @@ DOMAIN-SUFFIX,gifyu.com
 DOMAIN-SUFFIX,gist.build
 DOMAIN-SUFFIX,git.new
 DOMAIN-SUFFIX,gitguardian.com
+DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,githubassets.com
+DOMAIN-SUFFIX,githubcopilot.com
+DOMAIN-SUFFIX,githubusercontent.com
 DOMAIN-SUFFIX,gitlab.com
 DOMAIN-SUFFIX,gitlab.io
 DOMAIN-SUFFIX,glavred.info
@@ -426,6 +429,7 @@ DOMAIN-SUFFIX,golosameriki.com
 DOMAIN-SUFFIX,gonift.com
 DOMAIN-SUFFIX,gonitro.com
 DOMAIN-SUFFIX,goodreads.com
+DOMAIN-SUFFIX,google.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,googletagmanager.com
 DOMAIN-SUFFIX,googleusercontent.com
@@ -674,6 +678,7 @@ DOMAIN-SUFFIX,metla.press
 DOMAIN-SUFFIX,metopera.org
 DOMAIN-SUFFIX,mezha.net
 DOMAIN-SUFFIX,microchip.com
+DOMAIN-SUFFIX,microsoft.com
 DOMAIN-SUFFIX,middlewareinventory.com
 DOMAIN-SUFFIX,mignews.com
 DOMAIN-SUFFIX,mintmobile.com
