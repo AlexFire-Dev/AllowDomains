@@ -411,6 +411,7 @@ nftset=/gifyu.com/4#inet#fw4#vpn_domains
 nftset=/gist.build/4#inet#fw4#vpn_domains
 nftset=/git.new/4#inet#fw4#vpn_domains
 nftset=/gitguardian.com/4#inet#fw4#vpn_domains
+nftset=/githubassets.com/4#inet#fw4#vpn_domains
 nftset=/gitlab.com/4#inet#fw4#vpn_domains
 nftset=/gitlab.io/4#inet#fw4#vpn_domains
 nftset=/glavred.info/4#inet#fw4#vpn_domains
